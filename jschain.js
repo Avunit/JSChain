@@ -23,10 +23,14 @@ Blockchain.prototype.getLastBlock = function() {
 	return this.chain[this.chain.length -1];
 }
 
-Blockchain.prototype.createNewTransaction = function() {
+Blockchain.prototype.createNewTransaction = function(quantity, sender, recipient) {
 	const newTransaction = {
-		quantity:
-		sender:
-		recipient:	
-	}
+		quantity: quantity,
+		sender: sender,
+		recipient: recipient
+	};
+
+	this.newTransactions.push(newTransaction);
+
+	return this.getLastBlock()['index'] + 1;
 }
