@@ -58,3 +58,5 @@ Blockchain.prototype.proofOfWork = function(previousBlockHash, currentBlockData)
 
 	return nonce;
 }
+
+module.exports = Blockchain;
