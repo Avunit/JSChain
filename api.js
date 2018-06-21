@@ -74,7 +74,12 @@ app.post('/register-broadcast', function(req, res)) {
 
 //Register node with network
 app.post('/register', function(req, res)) {
+	const newNodeUrl = req.body.newNodeUrl;
+	const notPresent = jsChain.networkNodes.indexOf(newNodeUrl) == -1;
+	const notCurrentNode = jsChain.currentNodeUrl !== newNodeUrl;
 
+	if (notPresent && notCurrentNode) jsChain.networkNodes.push(newNodeUrl);
+	res.json({ note: 'Node registered.' });
 });
 
 //Register multiple nodes with network
