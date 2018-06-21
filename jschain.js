@@ -1,9 +1,12 @@
 const sha256 = require('sha256');
+const currentNodeUrl = process.argv[2];
 
 function Blockchain() {
 	this.chain = [];
 	this.newTransactions = [];
 
+	this.currentNodeUrl = currentNodeUrl;
+	this.networkNodes = [];
 	//Arb values for genesis block
 	this.createNewBlock(1, '0', '0');
 }
