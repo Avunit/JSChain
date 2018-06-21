@@ -20,7 +20,7 @@ app.post('/transaction', function(req, res) {
 	res.json({ note: `Transaction pending, will be added in block ${blockIndex}.`});
 });
 
-app.post('/mine', function(req, res) {
+app.get('/mine', function(req, res) {
 	const lastBlock = jsChain.getLastBlock();
 	const previousBlockHash = lastBlock['hash'];
 	const currentBlockData = {
