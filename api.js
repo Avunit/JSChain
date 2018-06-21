@@ -84,7 +84,14 @@ app.post('/register', function(req, res)) {
 
 //Register multiple nodes with network
 app.post('/register-bulk', function(req, res)) {
+	const allNetworkNodes = req.body.allNetworkNodes;
+	allNetworkNodes.forEach(networkNodeUrl => {
+		const notPresent = jsChain.networkNodes.indexOf(networkNodeUrl) == -1;
+		const notCurrentNode = jsChain.currentNodeUrl !== networkNodeUrl;
+		if (notPresent && notCurrentNode) jsChain.networkNodes.push(networkNodeUrl);
+	});
 
+	res.json({ note: "Bulk registration successful." });
 });
 
 app.listen(3000, function() {
