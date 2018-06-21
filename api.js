@@ -17,8 +17,9 @@ app.get('/blockchain', function(req, res) {
 });
 
 app.post('/transaction', function(req, res) {
-	const blockIndex = jsChain.createNewTransaction(req.body.quantity, req.body.sender, req.body.recipient);
-	res.json({ note: `Transaction pending, will be added in block ${blockIndex}.`});
+	const newTransaction = req.body;
+	const blockIndex = jsChain.addTransactionToPending(newTransaction);
+	res.json({ note: `Transaction pending for block ${blockIndex}.` });
 });
 
 app.post('/transaction/broadcast', function(req, res) {
