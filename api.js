@@ -21,6 +21,28 @@ app.post('/transaction', function(req, res) {
 	res.json({ note: `Transaction pending, will be added in block ${blockIndex}.`});
 });
 
+app.post('/transaction/broadcast', function(req, res) {
+	const newTransaction = jsChain.createNewTransaction(req.body.quantity, req.body.sender, req.body.recipient);
+	jsChain.addTransactionToPending(newTransaction);
+
+	const requestPromises = [];
+	jsChain.networkNodes.forEach(networkNodeUrl => {
+		const requestOptions = {
+			uri: networkNodeUrl + '/transaction',
+			method: 'POST',
+			body: newTransaction,
+			json: true
+		};
+
+		requestPromises.push(rp(requestOptions));
+	});
+
+	Promise.all(requestPromises);
+	.then(data => {
+		res.json({ note: 'Transaction created and broadcast.' });
+	});
+});
+
 app.get('/mine', function(req, res) {
 	const lastBlock = jsChain.getLastBlock();
 	const previousBlockHash = lastBlock['hash'];
