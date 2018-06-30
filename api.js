@@ -92,12 +92,12 @@ app.post('/new-block', function(req, res) {
 		jsChain.pendingTransactions = [];
 
 		res.json({
-			note: 'New block accepted',
+			note: 'New block accepted.',
 			newBlock: newBlock
 		});
 	} else {
 		res.json({
-			note: 'New block rejected',
+			note: 'New block rejected.',
 			newBlock: newBlock
 		});
 	}
@@ -188,7 +188,7 @@ app.get('/consensus', function(req, res) {
 
 		if (!newLongestChain || (newLongestChain && jsChain.chainIsValid(newLongestChain))) {
 			res.json({
-				note: 'Current chain not replaced.',
+				note: 'Chain not replaced.',
 				chain: jsChain.chain
 			});
 		}

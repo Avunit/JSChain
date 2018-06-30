@@ -39,9 +39,7 @@ Blockchain.prototype.createNewTransaction = function(quantity, sender, recipient
 		recipient: recipient
 		transactionId: uuid().split('-').join('');
 	};
-
-	//this.newTransactions.push(newTransaction);
-	//return this.getLastBlock()['index'] + 1;
+	
 	return newTransaction;
 };
 
