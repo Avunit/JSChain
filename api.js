@@ -38,7 +38,7 @@ app.post('/transaction/broadcast', function(req, res) {
 		requestPromises.push(rp(requestOptions));
 	});
 
-	Promise.all(requestPromises);
+	Promise.all(requestPromises)
 	.then(data => {
 		res.json({ note: 'Transaction created and broadcast.' });
 	});
@@ -49,7 +49,7 @@ app.get('/mine', function(req, res) {
 	const previousBlockHash = lastBlock['hash'];
 	const currentBlockData = {
 		transactions: jsChain.pendingTransactions,
-		index: lastBlock['index'] + 1;
+		index: lastBlock['index'] + 1
 	};
 	const nonce = jsChain.proofOfWork(previousBlockHash, currentBlockData);
 	const blockHash = jsChain.hashBlock(previousBlockHash, currentBlockData, nonce);
@@ -68,10 +68,6 @@ app.get('/mine', function(req, res) {
 	});
 
 	Promise.all(requestPromises)
-	.then(data => {
-		//Mining reward will go here
-		//return rp(requestOptions);
-	});
 	.then(data => {
 		res.json({
 			note: "Block mined successfully",
@@ -103,7 +99,7 @@ app.post('/new-block', function(req, res) {
 	}
 });
 //Register new node and broadcast to network
-app.post('/register-broadcast', function(req, res)) {
+app.post('/register-broadcast', function(req, res) {
 	const newNodeUrl = req.body.newNodeUrl;
 	if (jsChain.networkNodes.indexOf(newNodeUrl) == -1) jsChain.networkNodes.push(newNodeUrl);
 
@@ -130,14 +126,14 @@ app.post('/register-broadcast', function(req, res)) {
 		};
 
 		return rp(bulkRegisterOptions);
-	});
-	.then(data => {
+
 		res.json({ note: 'Node registered with network.' });
+
 	});
 });
 
 //Register node with network
-app.post('/register', function(req, res)) {
+app.post('/register', function(req, res) {
 	const newNodeUrl = req.body.newNodeUrl;
 	const notPresent = jsChain.networkNodes.indexOf(newNodeUrl) == -1;
 	const notCurrentNode = jsChain.currentNodeUrl !== newNodeUrl;
@@ -147,7 +143,7 @@ app.post('/register', function(req, res)) {
 });
 
 //Register multiple nodes with network
-app.post('/register-bulk', function(req, res)) {
+app.post('/register-bulk', function(req, res) {
 	const allNetworkNodes = req.body.allNetworkNodes;
 	allNetworkNodes.forEach(networkNodeUrl => {
 		const notPresent = jsChain.networkNodes.indexOf(networkNodeUrl) == -1;
@@ -163,7 +159,7 @@ app.get('/consensus', function(req, res) {
 	const requestPromises = [];
 	jsChain.networkNodes.forEach(networkNodeUrl => {
 		const requestOptions = {
-			uri: networkNodeUrl + '/blockchain'.
+			uri: networkNodeUrl + '/blockchain',
 			method: 'GET',
 			json: true
 		};
@@ -171,7 +167,7 @@ app.get('/consensus', function(req, res) {
 		requestPromises.push(rp(requestOptions));
 	});
 
-	Promise.all(requestPromises);
+	Promise.all(requestPromises)
 	.then(blockchains => {
 		const currentChainLength = jsChain.chain.length;
 		let maxChainLength = currentChainLength;

@@ -36,8 +36,8 @@ Blockchain.prototype.createNewTransaction = function(quantity, sender, recipient
 	const newTransaction = {
 		quantity: quantity,
 		sender: sender,
-		recipient: recipient
-		transactionId: uuid().split('-').join('');
+		recipient: recipient,
+		transactionId: uuid().split('-').join('')
 	};
 	
 	return newTransaction;
