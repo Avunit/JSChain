@@ -199,6 +199,8 @@ app.get('/consensus', function(req, res) {
 	});
 });
 
+app.set('x-powered-by', false);
+
 app.listen(3000, function() {
 	console.log(' --| Listening |-- ');
 });
