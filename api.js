@@ -222,11 +222,20 @@ app.get('/address/:address', function(req, res){
 	res.json({
 		addressData: addressData
 	});
-
 });
+
+app.get('/explorer', function(req, res){
+	res.sendFile('./explore/index.html', { root: __dirname });
+});
+
+if (process.argv[2] == null || process.argv[3] == null) {
+	console.log('Please specify node address and port arguments!');
+	console.log('api.js (domain) (port)');
+	process.exit();
+};
 
 app.set('x-powered-by', false);
 
-app.listen(3000, function() {
-	console.log(' --| Listening |-- ');
+app.listen(process.argv[3], function() {
+	console.log('JSChain listening on port ' + process.argv[3]);
 });
