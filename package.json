@@ -1,0 +1,27 @@
+{
+  "name": "JSChain",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://i.imgur.com/KQbrC9N.png\" alt=\"JSChain logo\"/>\r </p>",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avunit/JSChain.git"
+  },
+  "keywords": [],
+  "author": "John Hayes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avunit/JSChain/issues"
+  },
+  "homepage": "https://github.com/Avunit/JSChain#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "sha256": "^0.2.0"
+  }
+}
